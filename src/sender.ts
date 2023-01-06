@@ -8,6 +8,16 @@ export type QRCode = {
     urlCode?: string;
 } 
 
+const chromiumArgs = [
+  '--disable-web-security', '--no-sandbox', '--disable-web-security',
+  '--aggressive-cache-discard', '--disable-cache', '--disable-application-cache',
+  '--disable-offline-load-stale-cache', '--disk-cache-size=0',
+  '--disable-background-networking', '--disable-default-apps', '--disable-extensions',
+  '--disable-sync', '--disable-translate', '--hide-scrollbars', '--metrics-recording-only',
+  '--mute-audio', '--no-first-run', '--safebrowsing-disable-auto-update',
+  '--ignore-certificate-errors', '--ignore-ssl-errors', '--ignore-certificate-errors-spki-list'
+];
+
 class Sender {
     private client: Whatsapp
     private connected: boolean
@@ -46,8 +56,9 @@ class Sender {
         //     this.connected = ['isLogged', 'qrReadSuccess', "chatsAvaiable"]
         //     .includes(statusFind)
         // }    
-
-        create('ws-sender-dev', qr)
+       
+        // create('ws-sender-dev', qr)
+        create('ws-sender-dev', qr, undefined, { useChrome: false, browserArgs: ['--no-sandbox'] })
         // status
         .then( (client) => start(client) )
         .catch( (error) => console.log(error) )
