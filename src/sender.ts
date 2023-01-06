@@ -58,7 +58,7 @@ class Sender {
         // }    
        
         // create('ws-sender-dev', qr)
-        create('ws-sender-dev', qr, undefined, { useChrome: false, browserArgs: ['--no-sandbox'] })
+        create('ws-sender-dev', qr, undefined, { useChrome: false, browserArgs: chromiumArgs })
         // status
         .then( (client) => start(client) )
         .catch( (error) => console.log(error) )
